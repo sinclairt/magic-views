@@ -44,6 +44,7 @@
             <div class="pull-right">
                 <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ trans('magic-views::magic-views.new') }}</a>
             </div>
+            <div class="clearfix"></div>
         </div>
     </div>
 @stop

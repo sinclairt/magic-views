@@ -38,5 +38,19 @@ return [
     'form-actions'      => [
         'create' => 'store',
         'edit'   => 'update'
-    ]
+    ],
+
+    /*
+     * Head view
+     *
+     * If you have a specific view to pull into the master layout to place in head section then put the view name here
+     */
+    'head' => null,
+
+    /*
+     * Foot view
+     *
+     * If you have a specific view to pull into the master layout to place in the foot section then put the view name here
+     */
+    'foot' => null
 ];
