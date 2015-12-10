@@ -71,7 +71,7 @@ class MagicViewsServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/../../../assets' => public_path('vendor/magic-views'),
+            __DIR__ . '/../../../../assets' => public_path('vendor/magic-views'),
         ], 'public');
     }
 
