@@ -19,8 +19,6 @@ class MagicViewsServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->package('sterling/magic-views');
-
         $this->loadItems();
 
         $this->setWhatPublishes();
