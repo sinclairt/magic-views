@@ -16,8 +16,8 @@ class LayoutViewComposer
             $view->with('breadcrumbs', $this->makeBreadcrumbs($modelName, $blade));
 
         $view->with('pageTitle', $modelName)
-             ->with('pageSubtitle', trans('magic-views::' . $view))
-             ->with('panelTitle', $modelName . trans('magic-views::' . $view));
+             ->with('pageSubtitle', trans('magic-views::' . $blade))
+             ->with('panelTitle', $modelName . trans('magic-views::' . $blade));
     }
 
     /**
