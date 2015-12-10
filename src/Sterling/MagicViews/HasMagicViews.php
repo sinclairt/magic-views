@@ -6,7 +6,8 @@ trait HasMagicViews
 {
     public function __call($name, $arguments)
     {
-        extract($arguments[0]);
+        if (sizeof($arguments) > 0)
+            extract($arguments[ 0 ]);
 
         $model = ! isset($model) ? app(ucwords($this->getBaseClass())) : $model;
 
@@ -22,7 +23,8 @@ trait HasMagicViews
 
     private function view($blade, $model, $args)
     {
-        extract($args[0]);
+        if (sizeof($args) > 0)
+            extract($args[ 0 ]);
 
         $class = get_class();
 
