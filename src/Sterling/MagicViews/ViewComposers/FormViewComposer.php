@@ -1,6 +1,6 @@
 <?php
 
-namespace Sterling\MagicView\ViewComposers;
+namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 

@@ -1,4 +1,4 @@
-<?php namespace Sterling\MagicView;
+<?php namespace Sterling\MagicViews;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -50,36 +50,36 @@ class MagicViewsServiceProvider extends ServiceProvider
 
     private function bootViewComposers()
     {
-        view()->composer('magic-views::crud.index', 'Sterling\MagicView\ViewComposers\IndexViewComposer');
+        view()->composer('magic-views::crud.index', 'Sterling\MagicViews\ViewComposers\IndexViewComposer');
 
         view()->composer([
             'magic-views::crud.create',
             'magic-views::crud.edit'
-        ], 'Sterling\MagicView\ViewComposers\FormViewComposer');
+        ], 'Sterling\MagicViews\ViewComposers\FormViewComposer');
 
-        view()->composer('magic-views::crud.show', 'Sterling\MagicView\ViewComposers\ShowViewComposer');
+        view()->composer('magic-views::crud.show', 'Sterling\MagicViews\ViewComposers\ShowViewComposer');
 
-        view()->composer('magic-views::layouts.master', 'Sterling\MagicView\ViewComposers\LayoutViewComposer');
+        view()->composer('magic-views::layouts.master', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
     }
 
     private function setWhatPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../views'                  => base_path('resources/views/vendor/magic-views'),
-            __DIR__ . '/../translations'           => base_path('resources/lang/vendor/magic-views'),
-            __DIR__ . '/../config/magic-views.php' => config_path('magic-views.php'),
+            __DIR__ . '/../../../views'                  => base_path('resources/views/vendor/magic-views'),
+            __DIR__ . '/../../../translations'           => base_path('resources/lang/vendor/magic-views'),
+            __DIR__ . '/../../../config/magic-views.php' => config_path('magic-views.php'),
         ]);
 
         $this->publishes([
-            __DIR__ . '/../assets' => public_path('vendor/magic-views'),
+            __DIR__ . '/../../../assets' => public_path('vendor/magic-views'),
         ], 'public');
     }
 
     private function loadItems()
     {
-        $this->loadViewsFrom(__DIR__ . '/../views', 'magic-views');
+        $this->loadViewsFrom(__DIR__ . '/../../../views', 'magic-views');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../translations', 'magic-views');
+        $this->loadTranslationsFrom(__DIR__ . '/../../../translations', 'magic-views');
     }
 
 }
