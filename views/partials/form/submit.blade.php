@@ -1,0 +1,5 @@
+<div class="form-group">
+    <div class="col-sm-6 col-sm-offset-3">
+        <button type="submit" class="btn btn-primary">{{ trans('magic-views::buttons.submit') }}</button>
+    </div>
+</div>
