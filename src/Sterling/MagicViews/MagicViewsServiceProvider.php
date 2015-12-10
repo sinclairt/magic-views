@@ -63,21 +63,21 @@ class MagicViewsServiceProvider extends ServiceProvider
     private function setWhatPublishes()
     {
         $this->publishes([
-            __DIR__ . '/../../../views'                  => base_path('resources/views/vendor/magic-views'),
-            __DIR__ . '/../../../translations'           => base_path('resources/lang/vendor/magic-views'),
-            __DIR__ . '/../../../config/magic-views.php' => config_path('magic-views.php'),
+            __DIR__ . '/../../views'                  => base_path('resources/views/vendor/magic-views'),
+            __DIR__ . '/../../translations'           => base_path('resources/lang/vendor/magic-views'),
+            __DIR__ . '/../../config/magic-views.php' => config_path('magic-views.php'),
         ]);
 
         $this->publishes([
-            __DIR__ . '/../../../../assets' => public_path('vendor/magic-views'),
+            __DIR__ . '/../../../assets' => public_path('vendor/magic-views'),
         ], 'public');
     }
 
     private function loadItems()
     {
-        $this->loadViewsFrom(__DIR__ . '/../../../views', 'magic-views');
+        $this->loadViewsFrom(__DIR__ . '/../../views', 'magic-views');
 
-        $this->loadTranslationsFrom(__DIR__ . '/../../../translations', 'magic-views');
+        $this->loadTranslationsFrom(__DIR__ . '/../../translations', 'magic-views');
     }
 
 }

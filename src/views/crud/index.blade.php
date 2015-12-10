@@ -25,7 +25,11 @@
                 @endforeach
                 <tr>
                     <td>
-                        @include($customOptions or 'magic-views::partials.table.options')
+                        @if(isset($customOptions))
+                            @include($customOptions)
+                        @else
+                            @include('magic-views::partials.table.options')
+                        @endif
                     </td>
                 </tr>
                 </tbody>
