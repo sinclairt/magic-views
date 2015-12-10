@@ -12,7 +12,7 @@
                 <tbody>
                 @foreach($columns as $column)
                     <tr>
-                        <td><strong>{{ trans('magic-views::magic-views.' . $column) }}</strong></td>
+                        <td><strong>{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong></td>
                         <td>{{ $model->$column }}</td>
                     </tr>
                 @endforeach

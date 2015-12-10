@@ -15,9 +15,9 @@ class LayoutViewComposer
         if (! $view->offsetExists('breadcrumbs'))
             $view->with('breadcrumbs', $this->makeBreadcrumbs($modelName, $blade));
 
-        $view->with('pageTitle', ucwords($modelName))
+        $view->with('pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)))
              ->with('pageSubTitle', ucwords(trans('magic-views::magic-views.' . $blade)))
-             ->with('panelTitle', ucwords($modelName) . ' ' . ucwords(trans('magic-views::magic-views.' . $blade)));
+             ->with('panelTitle', ucwords(trans('magic-views::magic-views.' . $modelName)) . ' ' . ucwords(trans('magic-views::magic-views.' . $blade)));
     }
 
     /**
@@ -33,7 +33,7 @@ class LayoutViewComposer
         $breadcrumbs[ $modelName ] = $modelName . '.index';
 
         if ($blade != 'index')
-            $breadcrumbs[ $blade ] = $modelName . '.' . $blade;
+            $breadcrumbs[ trans('magic-views::magic-views.' . $blade) ] = $modelName . '.' . $blade;
 
         return $breadcrumbs;
     }

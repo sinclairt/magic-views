@@ -11,7 +11,7 @@
                     <thead>
                     <tr>
                         @foreach($columns as $column)
-                            <th>{{ trans('magic-views::magic-views.' . $column) }}</th>
+                            <th>{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
                         @endforeach
                         <th>{{ trans('magic-views::magic-views.options') }}</th>
                     </tr>
