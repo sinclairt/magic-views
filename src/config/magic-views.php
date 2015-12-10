@@ -39,18 +39,16 @@ return [
         'create' => 'store',
         'edit'   => 'update'
     ],
-
     /*
-     * Head view
+     * Partials
      *
-     * If you have a specific view to pull into the master layout to place in head section then put the view name here
+     * Here you can change the default views that are pulled into the master layout, even changing the master layout itself
      */
-    'head' => null,
+    'master'            => 'magic-views::layouts.master',
+    'head'              => 'magic-views::includes.head',
+    'foot'              => 'magic-views::includes.foot',
+    'nav'               => 'magic-views::includes.nav',
+    'breadcrumbs'       => 'magic-views::includes.breadcrumbs',
+    'page-title'        => 'magic-views::includes.page-title',
 
-    /*
-     * Foot view
-     *
-     * If you have a specific view to pull into the master layout to place in the foot section then put the view name here
-     */
-    'foot' => null
 ];

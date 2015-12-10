@@ -57,6 +57,7 @@ class MagicViewsServiceProvider extends ServiceProvider
 
         view()->composer('magic-views::crud.show', 'Sterling\MagicViews\ViewComposers\ShowViewComposer');
 
+        view()->composer('magic-views::includes.breadcrumbs', 'Sterling\MagicViews\ViewComposers\BreadcrumbViewComposer');
         view()->composer('magic-views::*', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
     }
 
