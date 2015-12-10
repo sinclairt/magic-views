@@ -1,23 +1,23 @@
 {
-    "name": "sterling/magic-views",
-    "description": "Magic CRUD views that takes the hassle out of repetitive blades.",
-    "type": "library",
-    "require": {
-        "illuminate/view": "^5.1",
-        "illuminate/support": "^5.1",
-        "illuminate/contracts": "^5.1"
-    },
+  "name": "sterling/magic-views",
+  "description": "Magic CRUD views that takes the hassle out of repetitive blades.",
+  "type": "library",
+  "require": {
+    "illuminate/view": "^5.1",
+    "illuminate/support": "^5.1",
+    "illuminate/contracts": "^5.1"
+  },
   "autoload": {
     "psr-0": {
       "Sterling\\MagicViews": "src/"
     }
-  }
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Tom Sinclair",
-            "email": "tsinclair@sterlingsolutions.co.uk"
-        }
-    ],
-    "minimum-stability": "dev"
+  },
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Tom Sinclair",
+      "email": "tsinclair@sterlingsolutions.co.uk"
+    }
+  ],
+  "minimum-stability": "dev"
 }
