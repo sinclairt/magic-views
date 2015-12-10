@@ -34,7 +34,7 @@ class FormViewComposer
 
         // if the action is set in the config then set that
         if ($configFormAction != false || $configFormAction != '')
-            return $configFormAction;
+            return $this->view->offsetGet('modelName') . '.' . $configFormAction;
 
         // otherwise we will use a default
         return $this->returnDefaultAction($blade, $this->view->offsetGet('modelName'));
@@ -61,13 +61,11 @@ class FormViewComposer
 
     private function formatFillableForForms($fillable)
     {
-        $fillable = array_flip($fillable);
+        $fields = [];
 
-        array_walk($fillable, function ($value, $key)
-        {
-            $fillable[ $key ] = 'text';
-        });
+        foreach($fillable as $field)
+            $fields[$field] = 'text';
 
-        return $fillable;
+        return $fields;
     }
 }
