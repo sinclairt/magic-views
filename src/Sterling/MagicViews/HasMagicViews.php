@@ -8,10 +8,12 @@ trait HasMagicViews
     {
         extract($arguments);
 
-        if (! isset($blade) || ! isset($model))
-            throw new \Exception('Magic Views requires at least the blade name and the model object');
+        $model = ! isset($model) ? app(ucwords($this->getBaseClass())) : $model;
 
-        $blade = str_ireplace('view', '', $blade);
+        if (! is_object($model))
+            throw new \Exception('Magic Views requires the model object');
+
+        $blade = str_ireplace('view', '', $name);
 
         $this->checkViewExists($blade);
 
