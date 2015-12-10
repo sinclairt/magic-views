@@ -57,7 +57,7 @@ class MagicViewsServiceProvider extends ServiceProvider
 
         view()->composer('magic-views::crud.show', 'Sterling\MagicViews\ViewComposers\ShowViewComposer');
 
-        view()->composer('*', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
+        view()->composer('magic-views::*', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
     }
 
     private function setWhatPublishes()
