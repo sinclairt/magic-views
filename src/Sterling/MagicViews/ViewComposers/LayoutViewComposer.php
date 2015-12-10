@@ -13,12 +13,11 @@ class LayoutViewComposer
         $blade = $view->offsetGet('blade');
 
         if (! $view->offsetExists('breadcrumbs'))
-            $breadcrumbs = $this->makeBreadcrumbs($modelName, $blade);
+            $view->with('breadcrumbs', $this->makeBreadcrumbs($modelName, $blade));
 
         $view->with('pageTitle', $modelName)
              ->with('pageSubtitle', trans('magic-views::' . $view))
-             ->with('panelTitle', $modelName . trans('magic-views::' . $view))
-             ->with('breadcrumbs', $breadcrumbs);
+             ->with('panelTitle', $modelName . trans('magic-views::' . $view));
     }
 
     /**

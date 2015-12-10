@@ -30,7 +30,7 @@ class FormViewComposer
         if (property_exists($class, $blade . 'FormAction'))
             return $this->{$blade . 'FormAction'};
 
-        $configFormAction = config('magic-views::form-actions.' . $blade, false);
+        $configFormAction = config('magic-views.form-actions.' . $blade, false);
 
         // if the action is set in the config then set that
         if ($configFormAction != false || $configFormAction != '')

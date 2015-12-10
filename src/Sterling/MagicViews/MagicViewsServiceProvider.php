@@ -57,7 +57,7 @@ class MagicViewsServiceProvider extends ServiceProvider
 
         view()->composer('magic-views::crud.show', 'Sterling\MagicViews\ViewComposers\ShowViewComposer');
 
-        view()->composer('magic-views::layouts.master', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
+        view()->composer('*', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
     }
 
     private function setWhatPublishes()
@@ -67,10 +67,6 @@ class MagicViewsServiceProvider extends ServiceProvider
             __DIR__ . '/../../translations'           => base_path('resources/lang/vendor/magic-views'),
             __DIR__ . '/../../config/magic-views.php' => config_path('magic-views.php'),
         ]);
-
-        $this->publishes([
-            __DIR__ . '/../../../assets' => public_path('vendor/magic-views'),
-        ], 'public');
     }
 
     private function loadItems()

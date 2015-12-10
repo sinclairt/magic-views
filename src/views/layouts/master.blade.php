@@ -4,7 +4,7 @@
     @include('magic-views::includes.head')
 </head>
 <body>
-@include('magic-views::includes.nav)
+@include('magic-views::includes.nav')
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-12">
