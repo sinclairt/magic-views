@@ -7,12 +7,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="{{ config('magic-views::project.image') }}">{{ config('magic-views::project.name')}}</a>
+            <a class="navbar-brand" href="{{ config('magic-views.project.image') }}">{{ config('magic-views.project.name')}}</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                @foreach(config('magic-views::nav-links') as $display => $routeName)
-                    <li><a href="{{ route($routeName) }}">{{ trans($display) }}</a> </li>
+                @foreach(config('magic-views.nav-links') as $display => $routeName)
+                    <li><a href="{{ route($routeName) }}">{{ trans('magic-views::magic-views.' . $display) }}</a> </li>
                 @endforeach
             </ul>
             <form class="navbar-form navbar-right">

@@ -1,7 +1,7 @@
 <div class="form-group @if($errors->has($field)) has-error @endif">
-    <label for="{{ $field }}" class="col-sm-3 control-label">{{ trans($field) }}</label>
+    <label for="{{ $field }}" class="col-sm-3 control-label">{{ trans('magic-views::magic-views.' . $field) }}</label>
     <div class="col-sm-6">
-        <input type="text" class="form-control" id="{{ $field }}" placeholder="{{ trans($field) }}" name="{{ $field }}">
+        <input type="text" class="form-control" id="{{ $field }}" placeholder="{{ trans('magic-views::magic-views.' . $field) }}" name="{{ $field }}">
     </div>
     @if($errors->has($field))
         <div class="col-sm-3">

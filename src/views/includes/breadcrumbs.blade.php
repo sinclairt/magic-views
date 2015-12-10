@@ -2,9 +2,9 @@
     <?php $i = 1; ?>
     @foreach($breadcrumbs as $display => $routeName)
         @if($i == count($breadcrumbs))
-            <li class="active">{{ trans($display) }}</li>
+            <li class="active">{{ trans('magic-views::magic-views.' . $display) }}</li>
         @else
-            <li><a href="{{ route($routeName) }}">{{ trans($display) }}</a></li>
+            <li><a href="{{ route($routeName) }}">{{ trans('magic-views::magic-views.' . $display) }}</a></li>
         @endif
         <?php $i++ ?>
     @endforeach

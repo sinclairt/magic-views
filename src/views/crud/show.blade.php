@@ -4,7 +4,7 @@
     <div class="panel panel-default">
 
         <div class="panel-heading">
-            <h3 class="panel-title">{{ $panelTitle or '' }}</h3>
+            <h3 class="panel-title">{{ $panelTitle }}</h3>
         </div>
 
         <div class="panel-body">
@@ -12,7 +12,7 @@
                 <tbody>
                 @foreach($columns as $column)
                     <tr>
-                        <td><strong>{{ trans('magic-views::' . $column) }}</strong></td>
+                        <td><strong>{{ trans('magic-views::magic-views.' . $column) }}</strong></td>
                         <td>{{ $model->$column }}</td>
                     </tr>
                 @endforeach

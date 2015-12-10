@@ -11,9 +11,9 @@
                     <thead>
                     <tr>
                         @foreach($columns as $column)
-                            <th>{{ trans('magic-views::' . $column) }}</th>
+                            <th>{{ trans('magic-views::magic-views.' . $column) }}</th>
                         @endforeach
-                        <th>{{ trans('magic-views::options') }}</th>
+                        <th>{{ trans('magic-views::magic-views.options') }}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -34,7 +34,7 @@
                     </tbody>
                 </table>
             @else
-                <p class="alert alert-info">There are no {{ str_plural(trans('magic-views::' . $modelName)) }}.</p>
+                <p class="alert alert-info">There are no {{ str_plural(trans('magic-views::magic-views.' . $modelName)) }}.</p>
             @endif
         </div>
         <div class="panel-footer">
@@ -42,7 +42,7 @@
                 {{ $rows->render() }}
             </div>
             <div class="pull-right">
-                <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ trans('magic-views::new') }}</a>
+                <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ trans('magic-views::magic-views.new') }}</a>
             </div>
         </div>
     </div>
