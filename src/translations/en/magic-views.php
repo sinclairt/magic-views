@@ -14,5 +14,7 @@ return [
     'edit'    => 'Edit',
     'create'  => 'Create',
     'index'   => 'All',
+    'home'    => 'Home',
+    'user'    => 'User'
 
 ];
