@@ -20,11 +20,12 @@ return [
     'fields'  =>
         [
             'user' => [
-                'name'              => 'Name',
-                'name_placeholder'  => 'Type your name',
-                'email'             => 'Email',
-                'email_placeholder' => 'jbloggs@example.com',
-                'password'          => 'Password'
+                'name'                  => 'Name',
+                'name_placeholder'      => 'Type your name',
+                'email'                 => 'Email',
+                'email_placeholder'     => 'jbloggs@example.com',
+                'password'              => 'Password',
+                'password_confirmation' => 'Password Confirmation'
             ]
         ]
 
