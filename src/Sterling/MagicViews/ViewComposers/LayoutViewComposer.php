@@ -17,7 +17,7 @@ class LayoutViewComposer
 
         $view->with('pageTitle', $modelName)
              ->with('pageSubTitle', trans('magic-views::magic-views.' . $blade))
-             ->with('panelTitle', $modelName . trans('magic-views::magic-views.' . $blade));
+             ->with('panelTitle', $modelName . ' ' . trans('magic-views::magic-views.' . $blade));
     }
 
     /**
@@ -33,7 +33,7 @@ class LayoutViewComposer
         $breadcrumbs[ $modelName ] = $modelName . '.index';
 
         if ($blade != 'index')
-            $breadcrumbs[ trans('magic-views::magic-views.' . $blade) ] = $modelName . '.' . $blade;
+            $breadcrumbs[ $blade ] = $modelName . '.' . $blade;
 
         return $breadcrumbs;
     }
