@@ -1,4 +1,4 @@
-@extends('magic-views::layouts.master')
+@extends(config('magic-views.magic-views.master'))
 
 @section('content')
     <div class="panel panel-default">
