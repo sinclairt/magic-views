@@ -10,6 +10,8 @@ class ShowViewComposer extends ViewComposer
     {
         $model = $view->offsetGet('model');
 
-        $view->with('columns', $model->getFillable());
+        $view->with('columns', $this->getColumns($model));
     }
+
+
 }

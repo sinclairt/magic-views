@@ -8,4 +8,14 @@ abstract class ViewComposer
     {
         return $view->offsetExists($var) ? $view->offsetGet($var) : $default;
     }
+
+    /**
+     * @param $model
+     *
+     * @return array
+     */
+    protected function getColumns($model)
+    {
+        return array_unique($model->getFillable(), $model->getHidden());
+    }
 }

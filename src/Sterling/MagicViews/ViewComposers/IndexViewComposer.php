@@ -10,7 +10,7 @@ class IndexViewComposer extends ViewComposer
     {
         $model = $view->offsetGet('model');
 
-        $columns = property_exists($model, 'indexColumns') ? $model->indexColumns: $model->getFillable();
+        $columns = property_exists($model, 'indexColumns') ? $model->indexColumns: $this->getColumns($model);
 
         $view->with('columns', $columns);
     }
