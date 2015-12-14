@@ -4,7 +4,7 @@ namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-class ShowViewComposer
+class ShowViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {

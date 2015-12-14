@@ -4,7 +4,7 @@ namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-class BreadcrumbViewComposer
+class BreadcrumbViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {
@@ -12,8 +12,7 @@ class BreadcrumbViewComposer
 
         $blade = $view->offsetGet('blade');
 
-        if (! $view->offsetExists('breadcrumbs'))
-            $view->with('breadcrumbs', $this->makeBreadcrumbs($modelName, $blade));
+        $view->with('breadcrumbs', $this->getOffset($view, 'breadcrumbs', $this->makeBreadcrumbs($modelName, $blade)));
     }
 
     /**

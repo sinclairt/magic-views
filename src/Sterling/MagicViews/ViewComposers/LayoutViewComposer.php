@@ -4,7 +4,7 @@ namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-class LayoutViewComposer
+class LayoutViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {
@@ -12,8 +12,14 @@ class LayoutViewComposer
 
         $blade = $view->offsetGet('blade');
 
-        $view->with('pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)))
-             ->with('pageSubTitle', ucwords(trans('magic-views::magic-views.' . $blade)))
-             ->with('panelTitle', ucwords(trans('magic-views::magic-views.' . $modelName)) . ' ' . ucwords(trans('magic-views::magic-views.' . $blade)));
+        $pageTitle = $this->getOffset($view, 'pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)));
+
+        $pageSubTitle = $this->getOffset($view, 'pageSubTitle', ucwords(trans('magic-views::magic-views.' . $blade)));
+
+        $panelTitle = $this->getOffset($view, 'panelTitle', $pageTitle . ' ' . $pageSubTitle);
+
+        $view->with('pageTitle', $pageTitle)
+             ->with('pageSubTitle', $pageSubTitle)
+             ->with('panelTitle', $panelTitle);
     }
 }

@@ -1,7 +1,7 @@
 <div class="form-group @if($errors->has($field)) has-error @endif">
     <label for="{{ $field }}" class="col-sm-3 control-label">{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}</label>
     <div class="col-sm-6">
-        <textarea class="form-control" rows="3" id="{{ $field }}" name="{{ $field }}" >{{ old($field, isset($model) ? $model->$field : null) }}</textarea>
+        <input type="email" class="form-control" id="{{ $field }}" name="{{ $field }}" value="{{ old($field) }}">
     </div>
     @if($errors->has($field))
         <div class="col-sm-3">

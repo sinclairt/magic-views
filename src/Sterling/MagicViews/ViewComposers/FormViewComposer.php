@@ -4,7 +4,7 @@ namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-class FormViewComposer
+class FormViewComposer extends ViewComposer
 {
     protected $view;
 
@@ -18,7 +18,7 @@ class FormViewComposer
 
         $fields = property_exists($model, 'fields') ? $model->fields : $this->formatFillableForForms($model->getFillable());
 
-        $action = $this->getFormAction($blade, $view->offsetGet('class'));
+        $action = $this->getOffset($view, 'action', $this->getFormAction($blade, $view->offsetGet('class')));
 
         $view->with('fields', $fields)
              ->with('action', $action);

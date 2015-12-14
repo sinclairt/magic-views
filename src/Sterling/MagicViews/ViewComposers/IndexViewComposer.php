@@ -4,7 +4,7 @@ namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 
-class IndexViewComposer
+class IndexViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {
