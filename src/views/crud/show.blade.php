@@ -18,7 +18,8 @@
                                 {{ $model->{'present' . studly_case($column)} }}
                             @else
                                 {{ $model->$column }}
-                            @endif</td>
+                            @endif
+                        </td>
                     </tr>
                 @endforeach
                 </tbody>
