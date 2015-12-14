@@ -16,6 +16,6 @@ abstract class ViewComposer
      */
     protected function getColumns($model)
     {
-        return array_unique($model->getFillable(), $model->getHidden());
+        return array_diff($model->getFillable(), $model->getHidden());
     }
 }
