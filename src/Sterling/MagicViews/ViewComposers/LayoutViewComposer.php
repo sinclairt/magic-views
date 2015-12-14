@@ -12,7 +12,7 @@ class LayoutViewComposer extends ViewComposer
 
         $blade = $view->offsetGet('blade');
 
-        $buttons = $this->getOffset($view, 'buttons', [ ]);
+        $buttons = $this->getOffset($view, 'buttons', [ 'all' ]);
 
         $pageTitle = $this->getOffset($view, 'pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)));
 
