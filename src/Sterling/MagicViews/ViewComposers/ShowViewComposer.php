@@ -10,7 +10,7 @@ class ShowViewComposer extends ViewComposer
     {
         $model = $view->offsetGet('model');
 
-        $view->with('columns', $this->getColumns($model));
+        $view->with('columns', $this->getOffset($view, 'columns', $this->getColumns($model)));
     }
 
 
