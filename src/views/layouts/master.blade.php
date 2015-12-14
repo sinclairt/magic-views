@@ -11,21 +11,33 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="container">
+
                 <div class="row">
                     <div class="col-sm-12">
                         @include(config('magic-views.breadcrumbs'))
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="col-sm-12">
                         @include(config('magic-views.page-title'))
                     </div>
                 </div>
+
+                @if(isset($additionalContentBefore))
+                    @include($additionalContentBefore)
+                @endif
+
                 <div class="row">
                     <div class="col-sm-12">
                         @yield('content')
                     </div>
                 </div>
+
+                @if(isset($additionalContentAfter))
+                    @include($additionalContentAfter)
+                @endif
+
             </div>
         </div>
     </div>

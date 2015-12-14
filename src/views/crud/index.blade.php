@@ -20,15 +20,21 @@
                     @foreach($rows as $row)
                         <tr>
                             @foreach($columns as $column)
-                                <td>{{ $row->$column }}</td>
-                            @endforeach
                                 <td>
-                                    @if(isset($customOptions))
-                                        @include($customOptions)
+                                    @if(method_exists($row, 'present' . studly_case($column)))
+                                        {{ $row->{'present' . studly_case($column)} }}
                                     @else
-                                        @include('magic-views::partials.table.options')
+                                        {{ $row->$column }}
                                     @endif
                                 </td>
+                            @endforeach
+                            <td>
+                                @if(isset($customOptions))
+                                    @include($customOptions)
+                                @else
+                                    @include('magic-views::partials.table.options')
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

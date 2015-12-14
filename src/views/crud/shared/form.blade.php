@@ -12,9 +12,17 @@
                 <input type="hidden" name="_method" value="put">
             @endif
 
+            @if(isset($additionalFormContentBefore))
+                @include($additionalFormContentBefore)
+            @endif
+
             @foreach($fields as $field => $type)
                 @include('magic-views::partials.form.' . $type, compact('field'))
             @endforeach
+
+            @if(isset($additionalFormContentAfter))
+                @include($additionalFormContentAfter)
+            @endif
 
         </div>
 
