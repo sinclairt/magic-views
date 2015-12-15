@@ -21,8 +21,8 @@
                         <tr>
                             @foreach($columns as $column)
                                 <td>
-                                    @if(method_exists($row, 'present' . studly_case($column)))
-                                        {{ $row->{'present' . studly_case($column)} }}
+                                    @if($hasPresenter)
+                                        {{ $row->present()->{ isset(${'present' . studly_case($column)} ) ? ${'present' . studly_case($column)} : camelCase($column)} }}
                                     @else
                                         {{ $row->$column }}
                                     @endif

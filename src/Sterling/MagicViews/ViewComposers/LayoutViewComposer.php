@@ -8,6 +8,8 @@ class LayoutViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {
+        $hasPresenter = in_array('PresentableTrait', class_uses($view->offsetGet('model')));
+
         $modelName = $view->offsetGet('modelName');
 
         $blade = $view->offsetGet('blade');
@@ -23,6 +25,7 @@ class LayoutViewComposer extends ViewComposer
         $view->with('pageTitle', $pageTitle)
              ->with('pageSubTitle', $pageSubTitle)
              ->with('panelTitle', $panelTitle)
+             ->with('hasPresenter', $hasPresenter)
              ->with('buttons', $buttons);
     }
 }
