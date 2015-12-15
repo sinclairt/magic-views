@@ -19,17 +19,23 @@ Add the following repository to your ``` composer.json ```. You will have access
 ``` composer install ```
 
 Add the service provider to your ``` app/config ```
+
 ```sh
 Sterling\MagicViews\MagicViewsServiceProvider::class
 ```
+
 ``` composer dump-autoload ```
 
 ### Usage
+
 Use the trait in your controller ``` use HasMagicViews; ```. As it stands, there are four views: index, create, edit, and show. The edit and update views require a ``` $model ``` variable, the index view requires a ``` $rows ``` variable which should be an instance of ``` Illuminate\Pagination\Paginator ```. You can get a paginated object by using ``` paginate() ``` on the end of your query instead of ``` get() ``` i.e.
+
 ``` sh
 $users = User::where('votes', '>', 100)->paginate(15);
 ```
+
 So an index method might look something like this:
+
 ``` sh
 public function index()
 {
@@ -40,12 +46,14 @@ public function index()
 ```
 
 Create like this...
+
 ``` sh
 public function create()
 {
     return $this->createView();
 }
 ```
+
 Edit...
 
 ``` sh
@@ -74,9 +82,9 @@ Magic  Views makes a few assumptions to ensure your views are rendered with as l
 
     - You have registered the model in the IoC container by its short name i.e. ``` App\Models\User ``` is registered in the IoC container as ``` User ```
 
-  ``` sh
-    $this->app->bind('User', 'App\Models\User'); // or an interface if you are following the SOLID principles
-  ```
+``` sh
+$this->app->bind('User', 'App\Models\User'); // or an interface if you are following the SOLID principles
+```
 
 
 ### Settings
