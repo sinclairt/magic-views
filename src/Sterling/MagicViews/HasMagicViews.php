@@ -14,7 +14,7 @@ trait HasMagicViews
         if (! is_object($model))
             throw new \Exception('Magic Views requires the model object');
 
-        $blade = str_ireplace('view', '', $name);
+        $blade = isset($blade) ? $blade : str_ireplace('view', '', $name);
 
         $this->checkViewExists($blade);
 
@@ -47,7 +47,7 @@ trait HasMagicViews
      */
     private function checkViewExists($blade)
     {
-        if (! view()->exists('magic-views::crud.' . $blade))
+        if (! view()->exists('magic-views::crud.' . $blade) && ! view()->exists($blade))
             throw new \Exception('The ' . $blade . ' view does not exist!');
     }
 

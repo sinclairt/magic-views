@@ -20,13 +20,7 @@
                     @foreach($rows as $row)
                         <tr>
                             @foreach($columns as $column)
-                                <td>
-                                    @if($hasPresenter)
-                                        {{ $row->present()->{ isset(${'present' . studly_case($column)} ) ? ${'present' . studly_case($column)} : camelCase($column)} }}
-                                    @else
-                                        {{ $row->$column }}
-                                    @endif
-                                </td>
+                                <td>@include('magic-views::partials.presentValue')</td>
                             @endforeach
                             <td>
                                 @if(isset($customOptions))

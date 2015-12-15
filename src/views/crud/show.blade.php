@@ -13,13 +13,7 @@
                 @foreach($columns as $column)
                     <tr>
                         <td><strong>{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong></td>
-                        <td>
-                            @if(method_exists($model, 'present' . studly_case($column)))
-                                {{ $model->{'present' . studly_case($column)} }}
-                            @else
-                                {{ $model->$column }}
-                            @endif
-                        </td>
+                        <td>@include('magic-views::partials.presentValue', ['row' => $model])</td>
                     </tr>
                 @endforeach
                 </tbody>
