@@ -76,15 +76,13 @@ public function show($model)
 
 Magic  Views makes a few assumptions to ensure your views are rendered with as little configuration as possible:
 
-    - You are using resourceful routing where your route names are the same as the model i.e. ``` User ``` model means ``` Route::resource('user', 'UserController'); ```
+   - You are using resourceful routing where your route names are the same as the model i.e. ``` User ``` model means ``` Route::resource('user', 'UserController'); ```
 
-    - You are following a naming convention with your models and controllers i.e. a ``` User ``` model has a controller of ``` UserController ```
+   - You are following a naming convention with your models and controllers i.e. a ``` User ``` model has a controller of ``` UserController ```
 
-    - You have registered the model in the IoC container by its short name i.e. ``` App\Models\User ``` is registered in the IoC container as ``` User ```
+   - You have registered the model in the IoC container by its short name i.e. ``` App\Models\User ``` is registered in the IoC container as ``` User ```
 
-``` sh
-$this->app->bind('User', 'App\Models\User'); // or an interface if you are following the SOLID principles
-```
+``` $this->app->bind('User', 'App\Models\User'); // or an interface if you are following the SOLID principles ```
 
 
 ### Settings
@@ -152,10 +150,14 @@ Magic views creates the following variables to put into the view, you can overid
 
 ##### Additional Content
 Magic Views allows you to add additional content to both the forms and the pages. To do this, create a view and pass the view name to one of the following variables and inject to the view:
-  - ``` $additionalFormContentBefore ``` Adds content before the form fields but inside the form
-  - ``` $additionalFormContentAfter ``` Adds content after the form field but inside the form
-  - ``` $additionalContentBefore ``` Adds content before the panel of content
-  - ``` $additionalContentAfter ``` Adds content after the panel of content
+
+   - ``` $additionalFormContentBefore ``` Adds content before the form fields but inside the form
+
+   - ``` $additionalFormContentAfter ``` Adds content after the form field but inside the form
+
+   - ``` $additionalContentBefore ``` Adds content before the panel of content
+
+   - ``` $additionalContentAfter ``` Adds content after the panel of content
 
 ``` sh
 $additionalContentAfter = 'partials.product.options';
