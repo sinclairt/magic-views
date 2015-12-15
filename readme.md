@@ -47,20 +47,25 @@ public function create()
 }
 ```
 Edit...
+
 ``` sh
 public function edit($model)
 {
     return $this->editView(compact('model'));
 }
 ```
+
 Show...
+
 ``` sh
 public function show($model)
 {
     return $this->showView(compact('model'));
 }
 ```
+
 ### Assumptions
+
 Magic  Views makes a few assumptions to ensure your views are rendered with as little configuration as possible:
 
     - You are using resourceful routing where your route names are the same as the model i.e. ``` User ``` model means ``` Route::resource('user', 'UserController'); ```
