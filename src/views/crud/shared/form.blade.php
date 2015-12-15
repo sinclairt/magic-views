@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="{{ route($action) }}">
+<form class="form-horizontal" action="{{ route($action, $model) }}">
     <div class="panel panel-default">
 
         <div class="panel-heading">
