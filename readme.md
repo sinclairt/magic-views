@@ -62,8 +62,11 @@ public function show($model)
 ```
 ### Assumptions
 Magic  Views makes a few assumptions to ensure your views are rendered with as little configuration as possible:
+
     - You are using resourceful routing where your route names are the same as the model i.e. ``` User ``` model means ``` Route::resource('user', 'UserController'); ```
+
     - You are following a naming convention with your models and controllers i.e. a ``` User ``` model has a controller of ``` UserController ```
+
     - You have registered the model in the IoC container by its short name i.e. ``` App\Models\User ``` is registered in the IoC container as ``` User ```
 
   ``` sh
