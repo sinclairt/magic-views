@@ -28,7 +28,7 @@ trait HasMagicViews
 
         $class = get_class();
 
-        $modelName = $this->getBaseClass();
+        $modelName = snake_case($this->getBaseClass());
 
         $data = array_merge(get_defined_vars(), func_get_args());
 
@@ -39,7 +39,7 @@ trait HasMagicViews
 
     private function getBaseClass()
     {
-        return strtolower(str_ireplace('controller', '', class_basename(get_class())));
+        return str_ireplace('controller', '', class_basename(get_class()));
     }
 
     /**
