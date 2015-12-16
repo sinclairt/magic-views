@@ -1,4 +1,4 @@
-<form class="form-horizontal" action="{{ route($action, $model) }}">
+<form class="form-horizontal" action="{{ route($action, $model) }}" method="POST">
     <div class="panel panel-default">
 
         <div class="panel-heading">

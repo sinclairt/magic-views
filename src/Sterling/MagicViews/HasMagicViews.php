@@ -16,7 +16,7 @@ trait HasMagicViews
 
         $blade = isset($blade) ? $blade : str_ireplace('view', '', $name);
 
-        $this->checkViewExists($blade);
+        $blade = $this->checkViewExists($blade);
 
         return $this->view($blade, $model, $arguments);
     }
@@ -32,7 +32,9 @@ trait HasMagicViews
 
         $data = array_merge(get_defined_vars(), func_get_args());
 
-        return view('magic-views::crud.' . $blade, $data);
+        $data['blade'] = str_replace('magic-views::crud.', '', $blade);
+
+        return view($blade, $data);
     }
 
     private function getBaseClass()
@@ -43,12 +45,18 @@ trait HasMagicViews
     /**
      * @param $blade
      *
+     * @return string
      * @throws \Exception
      */
     private function checkViewExists($blade)
     {
         if (! view()->exists('magic-views::crud.' . $blade) && ! view()->exists($blade))
             throw new \Exception('The ' . $blade . ' view does not exist!');
+
+        if(view()->exists($blade))
+            return $blade;
+
+        return 'magic-views::crud.' . $blade;
     }
 
 
