@@ -7,7 +7,10 @@ trait HasMagicViews
     public function __call($name, $arguments)
     {
         if (sizeof($arguments) > 0)
-            extract($arguments[ 0 ]);
+            if (is_array($arguments[ 0 ]))
+                extract($arguments[ 0 ]);
+            elseif (is_object($arguments[ 0 ]))
+                $model = $arguments[ 0 ];
 
         $model = ! isset($model) ? app(ucwords($this->getBaseClass())) : $model;
 
@@ -21,10 +24,13 @@ trait HasMagicViews
         return $this->view($blade, $model, $arguments);
     }
 
-    private function view($blade, $model, $args)
+    private function view($blade, $model, $arguments)
     {
-        if (sizeof($args) > 0)
-            extract($args[ 0 ]);
+        if (sizeof($arguments) > 0)
+            if (is_array($arguments[ 0 ]))
+                extract($arguments[ 0 ]);
+            elseif (is_object($arguments[ 0 ]))
+                $model = $arguments[ 0 ];
 
         $class = get_class();
 
@@ -32,7 +38,7 @@ trait HasMagicViews
 
         $data = array_merge(get_defined_vars(), func_get_args());
 
-        $data['blade'] = str_replace('magic-views::crud.', '', $blade);
+        $data[ 'blade' ] = str_replace('magic-views::crud.', '', $blade);
 
         return view($blade, $data);
     }
@@ -53,7 +59,7 @@ trait HasMagicViews
         if (! view()->exists('magic-views::crud.' . $blade) && ! view()->exists($blade))
             throw new \Exception('The ' . $blade . ' view does not exist!');
 
-        if(view()->exists($blade))
+        if (view()->exists($blade))
             return $blade;
 
         return 'magic-views::crud.' . $blade;
