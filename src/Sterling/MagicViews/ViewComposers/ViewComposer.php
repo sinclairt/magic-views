@@ -18,7 +18,7 @@ abstract class ViewComposer
     {
         if (property_exists($model, 'showColumns'))
             return $model->showColumns;
-        
+
         return array_diff($model->getFillable(), $model->getHidden());
     }
 }

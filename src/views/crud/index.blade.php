@@ -11,16 +11,19 @@
                     <thead>
                     <tr>
                         @foreach($columns as $column)
-                            <th>{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
+                            <th>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
                         @endforeach
-                        <th>{{ trans('magic-views::magic-views.options') }}</th>
+                        <th>{{ get_trans('magic-views::magic-views.options') }}</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($rows as $row)
                         <tr>
                             @foreach($columns as $column)
-                                <td>@include('magic-views::partials.presentValue')</td>
+                                <td>
+                                    @include('magic-views::partials.presentValue')
+                                    @include('magic-views::deleted_badge')
+                                </td>
                             @endforeach
                             <td>
                                 @if(isset($customOptions))
@@ -34,15 +37,21 @@
                     </tbody>
                 </table>
             @else
-                <p class="alert alert-info">There are no {{ str_plural(trans('magic-views::magic-views.' . $modelName)) }}.</p>
+                <p class="alert alert-info">There are no {{ str_plural(get_trans('magic-views::magic-views.' . $modelName)) }}.</p>
             @endif
         </div>
         <div class="panel-footer">
             <div class="pull-left">
-                {{ $rows->render() }}
+                {!! $rows->render() !!}
             </div>
             <div class="pull-right">
-                <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ trans('magic-views::magic-views.new') }}</a>
+                @if(isset($new))
+                    @if($new)
+                        <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
+                    @endif
+                @else
+                    <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
+                @endif
             </div>
             <div class="clearfix"></div>
         </div>

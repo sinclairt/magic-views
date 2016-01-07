@@ -1,5 +1,5 @@
 <div class="form-group @if($errors->has($field)) has-error @endif">
-    <label for="{{ $field }}" class="col-sm-3 control-label">{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}</label>
+    <label for="{{ $field }}" class="col-sm-3 control-label">{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}</label>
     <div class="col-sm-6">
         <textarea class="form-control" rows="3" id="{{ $field }}" name="{{ $field }}" >{{ old($field, isset($model) ? $model->$field : null) }}</textarea>
     </div>

@@ -2,7 +2,7 @@
     <div class="col-sm-offset-3 col-sm-6">
         <div class="radio">
             <label>
-                <input type="radio" name="{{ $field }}" value="{{ old($field, isset($model) ? $model->$field : null) }}"> {{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}
+                <input type="radio" name="{{ $field }}" value="{{ old($field, isset($model) ? $model->$field : null) }}"> {{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}
             </label>
         </div>
     </div>

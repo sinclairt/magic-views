@@ -51,4 +51,14 @@ return [
     'breadcrumbs'       => 'magic-views::includes.breadcrumbs',
     'page-title'        => 'magic-views::includes.page-title',
 
+
+    /*
+     * Trans Fallback
+     *
+     * The trans method returns the full string passed to it, if the value cannot be found.
+     * However with the fallback, this will return the last element of the dot notation
+     * i.e. general.responses.success will return success instead of the full string.
+     */
+    'use-trans-fallback' => true
+
 ];

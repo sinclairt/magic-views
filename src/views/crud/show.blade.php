@@ -12,7 +12,7 @@
                 <tbody>
                 @foreach($columns as $column)
                     <tr>
-                        <td><strong>{{ trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong></td>
+                        <td><strong>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong></td>
                         <td>@include('magic-views::partials.presentValue', ['row' => $model])</td>
                     </tr>
                 @endforeach

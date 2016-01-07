@@ -15,7 +15,7 @@
             </form>
             <ul class="nav navbar-nav navbar-right">
                 @foreach(config('magic-views.nav-links') as $display => $routeName)
-                    <li><a href="{{ route($routeName) }}">{{ trans('magic-views::magic-views.' . $display) }}</a> </li>
+                    <li><a href="{{ route($routeName) }}">{{ get_trans('magic-views::magic-views.' . $display) }}</a> </li>
                 @endforeach
                 @if(Auth::check())
                         <li class="dropdown">

@@ -10,7 +10,10 @@
   "autoload": {
     "psr-0": {
       "Sterling\\MagicViews": "src/"
-    }
+    },
+    "files": [
+      "Sterling/helpers.php"
+    ]
   },
   "license": "MIT",
   "authors": [
