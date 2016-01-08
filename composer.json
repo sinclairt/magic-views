@@ -12,7 +12,7 @@
       "Sterling\\MagicViews": "src/"
     },
     "files": [
-      "Sterling/helpers.php"
+      "src/Sterling/helpers.php"
     ]
   },
   "license": "MIT",
