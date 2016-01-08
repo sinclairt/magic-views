@@ -45,7 +45,7 @@ trait HasMagicViews
 
     private function getBaseClass()
     {
-        return str_ireplace('controller', '', class_basename(get_class()));
+        return str_ireplace('controller', '', class_basename(get_class($this)));
     }
 
     /**

@@ -8,7 +8,7 @@ class LayoutViewComposer extends ViewComposer
 {
     public function compose(View $view)
     {
-        $hasPresenter = in_array('PresentableTrait', class_uses($view->offsetGet('model')));
+        $hasPresenter = usesPresenter($view->offsetGet('model'));
 
         $modelName = $view->offsetGet('modelName');
 
