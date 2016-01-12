@@ -7,7 +7,8 @@ return [
         'show'    => 'Show',
         'edit'    => 'Edit',
         'delete'  => 'Delete',
-        'restore' => 'Restore'
+        'restore' => 'Restore',
+        'cancel'  => 'Cancel'
     ],
     'options' => 'Options',
     'new'     => 'New',
