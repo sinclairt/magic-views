@@ -13,7 +13,9 @@
                         @foreach($columns as $column)
                             <th>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
                         @endforeach
-                        <th>{{ get_trans('magic-views::magic-views.options') }}</th>
+                        @if(isset($customOptions) || $buttons != [])
+                            <th>{{ get_trans('magic-views::magic-views.options') }}</th>
+                        @endif
                     </tr>
                     </thead>
                     <tbody>
@@ -25,13 +27,15 @@
                                     @include('magic-views::deleted_badge')
                                 </td>
                             @endforeach
-                            <td>
-                                @if(isset($customOptions))
-                                    @include($customOptions)
-                                @else
-                                    @include('magic-views::partials.table.options')
-                                @endif
-                            </td>
+                            @if(isset($customOptions) || $buttons != [])
+                                <td>
+                                    @if(isset($customOptions))
+                                        @include($customOptions)
+                                    @else
+                                        @include('magic-views::partials.table.options')
+                                    @endif
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                     </tbody>

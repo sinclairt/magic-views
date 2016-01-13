@@ -29,5 +29,13 @@ function isView($object)
 
 function usesTrait($model, $trait)
 {
-    return in_array($trait, class_uses($model));
+    $currentModelUsesPresenter = in_array($trait, class_uses($model));
+
+    $parentModelUsesPresenter = false;
+
+    foreach (class_parents($model) as $parent)
+        if (in_array($trait, class_uses($parent)))
+            $parentModelUsesPresenter = true;
+
+    return $currentModelUsesPresenter == true || $parentModelUsesPresenter == true;
 }
