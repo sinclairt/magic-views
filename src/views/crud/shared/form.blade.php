@@ -17,7 +17,7 @@
             @endif
 
             @foreach($fields as $field => $type)
-                @include('magic-views::partials.form.' . $type, compact('field'))
+                @include(view()->exists('magic-views::partials.form.' . $type) ? 'magic-views::partials.form.' . $type : $type, compact('field'))
             @endforeach
 
             @if(isset($additionalFormContentAfter))
