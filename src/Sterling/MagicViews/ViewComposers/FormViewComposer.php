@@ -28,7 +28,7 @@ class FormViewComposer extends ViewComposer
     {
         // if the action is set on the class then return that
         if (property_exists($class, $blade . 'FormAction'))
-            return $this->{$blade . 'FormAction'};
+            return app($class)->{$blade . 'FormAction'};
 
         $configFormAction = config('magic-views.form-actions.' . $blade, false);
 

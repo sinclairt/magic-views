@@ -24,7 +24,7 @@
                             @foreach($columns as $column)
                                 <td>
                                     @include('magic-views::partials.presentValue')
-                                    @include('magic-views::deleted_badge')
+                                    @include('magic-views::partials.deleted_badge')
                                 </td>
                             @endforeach
                             @if(isset($customOptions) || $buttons != [])
