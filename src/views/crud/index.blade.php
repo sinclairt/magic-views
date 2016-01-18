@@ -51,10 +51,10 @@
             <div class="pull-right">
                 @if(isset($new))
                     @if($new)
-                        <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
+                        <a href="{{ route($modelName . '.create', $newParams) }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
                     @endif
                 @else
-                    <a href="{{ route($modelName . '.create') }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
+                    <a href="{{ route($modelName . '.create', $newParams) }}" class="btn btn-primary">{{ get_trans('magic-views::magic-views.new') }}</a>
                 @endif
             </div>
             <div class="clearfix"></div>
