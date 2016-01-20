@@ -48,15 +48,13 @@ class FormViewComposer extends ViewComposer
      */
     private function returnDefaultAction($blade, $modelName)
     {
-        switch ($blade)
-        {
-            case 'create':
-                return $modelName . '.' . 'store';
-            case 'edit':
-                return $modelName . '.' . 'update';
-            default:
-                return false;
-        }
+        if(str_contains($blade, 'create'))
+            return $modelName . '.store';
+
+        if(str_contains($blade, 'edit'))
+            return $modelName . '.update';
+
+        return false;
     }
 
     private function formatFillableForForms($fillable)

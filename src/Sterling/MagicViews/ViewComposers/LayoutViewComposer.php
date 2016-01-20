@@ -18,7 +18,7 @@ class LayoutViewComposer extends ViewComposer
 
         $pageTitle = $this->getOffset($view, 'pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)));
 
-        $pageSubTitle = $this->getOffset($view, 'pageSubTitle', ucwords(trans('magic-views::magic-views.' . $blade)));
+        $pageSubTitle = $this->getOffset($view, 'pageSubTitle', ucwords(trans('magic-views::magic-views.' . last(explode('.', $blade)))));
 
         $panelTitle = $this->getOffset($view, 'panelTitle', $pageTitle . ' ' . $pageSubTitle);
 
