@@ -3,6 +3,8 @@
 namespace Sterling\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
+use Route;
+use Input;
 
 class BreadcrumbViewComposer extends ViewComposer
 {
