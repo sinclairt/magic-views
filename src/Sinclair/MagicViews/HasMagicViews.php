@@ -1,6 +1,6 @@
 <?php
 
-namespace Sterling\MagicViews;
+namespace Sinclair\MagicViews;
 
 trait HasMagicViews
 {

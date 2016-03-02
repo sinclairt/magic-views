@@ -3,25 +3,25 @@
 Magic views are a quick and simple way to implement crud views with as little or as much customisation as you want.
 
 ### Installation
-Add the following repository to your ``` composer.json ```. You will have access as long as you belong to the Sterling team on Bitbucket.
+Add the following repository to your ``` composer.json ```. You will have access as long as you belong to the Sinclair team on Bitbucket.
 
 ``` sh
   "repositories": [
     {
       "type": "composer",
-      "url": "http://satis.sterling-design.co.uk"
+      "url": "http://satis.wtbidev.co.uk"
     }
   ]
 ```
 
-``` composer require sterling/magic-views ```
+``` composer require sinclair/magic-views ```
 
 ``` composer install ```
 
 Add the service provider to your ``` app/config ```
 
 ```sh
-Sterling\MagicViews\MagicViewsServiceProvider::class
+Sinclair\MagicViews\MagicViewsServiceProvider::class
 ```
 
 ``` composer dump-autoload ```

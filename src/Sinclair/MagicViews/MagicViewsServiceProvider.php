@@ -1,4 +1,4 @@
-<?php namespace Sterling\MagicViews;
+<?php namespace Sinclair\MagicViews;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -48,16 +48,16 @@ class MagicViewsServiceProvider extends ServiceProvider
 
     private function bootViewComposers()
     {
-        view()->composer('magic-views::crud.index', 'Sterling\MagicViews\ViewComposers\IndexViewComposer');
+        view()->composer('magic-views::crud.index', 'Sinclair\MagicViews\ViewComposers\IndexViewComposer');
 
         view()->composer([
             'magic-views::crud.shared.form'
-        ], 'Sterling\MagicViews\ViewComposers\FormViewComposer');
+        ], 'Sinclair\MagicViews\ViewComposers\FormViewComposer');
 
-        view()->composer('magic-views::crud.show', 'Sterling\MagicViews\ViewComposers\ShowViewComposer');
+        view()->composer('magic-views::crud.show', 'Sinclair\MagicViews\ViewComposers\ShowViewComposer');
 
-        view()->composer('magic-views::includes.breadcrumbs', 'Sterling\MagicViews\ViewComposers\BreadcrumbViewComposer');
-        view()->composer('magic-views::crud.*', 'Sterling\MagicViews\ViewComposers\LayoutViewComposer');
+        view()->composer('magic-views::includes.breadcrumbs', 'Sinclair\MagicViews\ViewComposers\BreadcrumbViewComposer');
+        view()->composer('magic-views::crud.*', 'Sinclair\MagicViews\ViewComposers\LayoutViewComposer');
     }
 
     private function setWhatPublishes()

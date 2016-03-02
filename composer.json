@@ -1,5 +1,5 @@
 {
-  "name": "sterling/magic-views",
+  "name": "sinclair/magic-views",
   "description": "Magic CRUD views that takes the hassle out of repetitive blades.",
   "type": "library",
   "require": {
@@ -9,17 +9,17 @@
   },
   "autoload": {
     "psr-0": {
-      "Sterling\\MagicViews": "src/"
+      "Sinclair\\MagicViews": "src/"
     },
     "files": [
-      "src/Sterling/helpers.php"
+      "src/Sinclair/helpers.php"
     ]
   },
   "license": "MIT",
   "authors": [
     {
       "name": "Tom Sinclair",
-      "email": "tsinclair@sterlingsolutions.co.uk"
+      "email": "tom.sinclair31@gmail.com"
     }
   ],
   "minimum-stability": "dev"
