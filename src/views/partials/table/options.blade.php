@@ -8,7 +8,7 @@
 
             @if(usesSoftDeletes($row))
 
-                @if(can(strtolower($modelName) . '.restore') && ($row->trashed() && (in_array('restore', $buttons) || in_array('all', $buttons))))
+                @if( $row->trashed() && (in_array('restore', $buttons) || in_array('all', $buttons)))
 
                     @if($dropdown)<li>@endif
                         @include('magic-views::partials.table.shared.crud-options', ['buttons' => ['show']])

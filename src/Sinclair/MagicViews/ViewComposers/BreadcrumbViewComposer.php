@@ -4,7 +4,7 @@ namespace Sinclair\MagicViews\ViewComposers;
 
 use Illuminate\Contracts\View\View;
 use Route;
-use Input;
+use Illuminate\Support\Facades\Input;
 
 class BreadcrumbViewComposer extends ViewComposer
 {
@@ -33,7 +33,7 @@ class BreadcrumbViewComposer extends ViewComposer
     {
         if ($view->offsetExists('rows'))
             return $view->offsetGet('rows')
-                        ->first();
+                ->first();
 
         if ($view->offsetExists('model'))
             return $view->offsetGet('model');
