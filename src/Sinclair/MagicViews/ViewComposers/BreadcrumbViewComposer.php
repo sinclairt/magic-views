@@ -8,13 +8,13 @@ use Illuminate\Support\Facades\Input;
 
 class BreadcrumbViewComposer extends ViewComposer
 {
-    public function compose(View $view)
+    public function compose( View $view )
     {
         // set default home route if it exists
         $breadcrumbs = Route::has('home') ? [ 'home' => 'home' ] : [ ];
 
         // first we need to set the model, we may need to get the first row
-        if ($model = $this->getModelFromView($view))
+        if ( $model = $this->getModelFromView($view) )
             $this->addBreadcrumbs($model, $breadcrumbs);
 
         $route = explode('.', Route::currentRouteName());
@@ -29,15 +29,15 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return bool|mixed
      */
-    protected function getModelFromView(View $view)
+    protected function getModelFromView( View $view )
     {
-        if ($view->offsetExists('rows'))
-            return $view->offsetGet('rows')
-                ->first();
-
-        if ($view->offsetExists('model'))
+        if ( $view->offsetExists('model') )
             return $view->offsetGet('model');
 
+        if ( $view->offsetExists('rows') )
+            return $view->offsetGet('rows')
+                        ->first();
+        
         return false;
     }
 
@@ -45,14 +45,14 @@ class BreadcrumbViewComposer extends ViewComposer
      * @param $model
      * @param $breadcrumbs
      */
-    protected function addBreadcrumbs($model, &$breadcrumbs = [ ])
+    protected function addBreadcrumbs( $model, &$breadcrumbs = [ ] )
     {
         // if the parent has a parent we need to go up the chain or we can try and guess the parent
         // but only if there is one foreign key in the fillable array otherwise its too much guessing
         $this->handleParent($model, $breadcrumbs);
 
         // if we have a specified method to add the objects breadcrumbs perfect we'll use that!
-        if (method_exists($model, 'addBreadcrumbs'))
+        if ( method_exists($model, 'addBreadcrumbs') )
             $breadcrumbs = array_merge($breadcrumbs, $model->addBreadcrumbs());
         else
         {
@@ -73,7 +73,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return string
      */
-    protected function properCase($snake_case_model)
+    protected function properCase( $snake_case_model )
     {
         return ucwords(str_replace('_', ' ', $snake_case_model));
     }
@@ -83,15 +83,15 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return mixed
      */
-    protected function getModelDescriber($model)
+    protected function getModelDescriber( $model )
     {
-        if (property_exists($model, 'describer'))
+        if ( property_exists($model, 'describer') )
             return $model->describer;
 
-        if ($model->name != null || $model->name != '')
+        if ( $model->name != null || $model->name != '' )
             return $model->name;
 
-        if ($model->text != null || $model->text != '')
+        if ( $model->text != null || $model->text != '' )
             return $model->text;
 
         return $this->properCase($this->snakeCaseModel($model));
@@ -102,7 +102,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return string
      */
-    protected function snakeCaseModel($model)
+    protected function snakeCaseModel( $model )
     {
         return snake_case(class_basename(get_class($model)));
     }
@@ -112,11 +112,11 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return mixed
      */
-    protected function guessParentRelationship($model)
+    protected function guessParentRelationship( $model )
     {
         $foreignKeys = $this->filterPotentialForeignKeys($model);
 
-        if (sizeof($foreignKeys) == 1)
+        if ( sizeof($foreignKeys) == 1 )
             return $this->getRelationshipFromKey(head($foreignKeys));
 
         return false;
@@ -127,9 +127,9 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return array
      */
-    protected function filterPotentialForeignKeys($model)
+    protected function filterPotentialForeignKeys( $model )
     {
-        return array_filter($model->getFillable(), function ($value)
+        return array_filter($model->getFillable(), function ( $value )
         {
             return str_contains($value, '_id');
         });
@@ -140,7 +140,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return mixed
      */
-    protected function getRelationshipFromKey($foreignKey)
+    protected function getRelationshipFromKey( $foreignKey )
     {
         return str_replace('_id', '', $foreignKey);
     }
@@ -154,7 +154,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return string
      */
-    protected function getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)
+    protected function getDefaultRestRoutes( $snake_case_model, $indexRoute, $editRoute )
     {
         $routes = [
             $snake_case_model . '.create',
@@ -165,17 +165,17 @@ class BreadcrumbViewComposer extends ViewComposer
 
         $defaultEdit = $snake_case_model . '.edit';
 
-        if ($indexRoute == $defaultIndex)
-            $routes[ ] = $indexRoute;
+        if ( $indexRoute == $defaultIndex )
+            $routes[] = $indexRoute;
 
-        if (is_array($indexRoute))
-            $routes[ ] = head($indexRoute);
+        if ( is_array($indexRoute) )
+            $routes[] = head($indexRoute);
 
-        if ($editRoute == $defaultEdit)
-            $routes[ ] = $editRoute;
+        if ( $editRoute == $defaultEdit )
+            $routes[] = $editRoute;
 
-        if (is_array($editRoute))
-            $routes[ ] = head($editRoute);
+        if ( is_array($editRoute) )
+            $routes[] = head($editRoute);
 
         return $routes;
     }
@@ -185,22 +185,22 @@ class BreadcrumbViewComposer extends ViewComposer
      * @param $breadcrumbs
      *
      */
-    protected function handleParent($model, &$breadcrumbs)
+    protected function handleParent( $model, &$breadcrumbs )
     {
         // if the model doesn't exist the parent may have been passed through as a query string
-        if (! $model->exists)
+        if ( !$model->exists )
         {
             // to be sure lets see if any of the input array matched the foreign keys
             $possibleInputParents = $this->getPossibleInputValuesAsParents($model);
 
-            if (sizeof($possibleInputParents) == 1)
+            if ( sizeof($possibleInputParents) == 1 )
                 $this->addBreadcrumbs($this->establishParentFromInput($possibleInputParents), $breadcrumbs);
         }
-        elseif (method_exists($model, 'parentRelationship'))
+        elseif ( method_exists($model, 'parentRelationship') )
         {
             $this->addBreadcrumbs($model->parentRelationship(), $breadcrumbs);
         }
-        elseif ($relationship = $this->guessParentRelationship($model, $breadcrumbs))
+        elseif ( $relationship = $this->guessParentRelationship($model, $breadcrumbs) )
         {
             $this->addBreadcrumbs($model->$relationship, $breadcrumbs);
         }
@@ -213,7 +213,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return string
      */
-    protected function getDefaultEditRoute($snake_case_model, $model)
+    protected function getDefaultEditRoute( $snake_case_model, $model )
     {
         return property_exists($model, 'breadcrumbEdit') ? $model->breadcrumbEdit : $snake_case_model . '.edit';
     }
@@ -224,7 +224,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return string
      */
-    protected function getDefaultIndexRoute($model, $snake_case_model)
+    protected function getDefaultIndexRoute( $model, $snake_case_model )
     {
         return property_exists($model, 'breadcrumbIndex') ? $model->breadcrumbIndex : $snake_case_model . '.index';
     }
@@ -236,7 +236,7 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return array
      */
-    protected function setIndexRoute($model, &$breadcrumbs, $snake_case_model)
+    protected function setIndexRoute( $model, &$breadcrumbs, $snake_case_model )
     {
         // we might need the parent model for the route so lets try and get that
         $relationship = $this->guessParentRelationship($model);
@@ -246,7 +246,7 @@ class BreadcrumbViewComposer extends ViewComposer
 
         // if the guessed route exists we need to add it the breadcrumbs.
         // We'll try and add the parent model for good measure just in case it needs it, it won't hurt if not.
-        if (Route::has($indexRoute))
+        if ( Route::has($indexRoute) )
             $breadcrumbs[ $this->properCase($snake_case_model) ] = $this->addModelToRoute($model, $relationship, $indexRoute);
 
         // We'll need to return the route for the edit comparisons later
@@ -261,13 +261,13 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return mixed
      */
-    protected function setEditRoute($model, &$breadcrumbs, $snake_case_model, $indexRoute)
+    protected function setEditRoute( $model, &$breadcrumbs, $snake_case_model, $indexRoute )
     {
         // lets try and guess the edit route
         $editRoute = $this->getDefaultEditRoute($snake_case_model, $model);
 
         // if the route is the models index we don't want to offer the edit route we will need a descriptive breadcrumbs such as all.
-        if (! in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute))
+        if ( !in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute) )
             $breadcrumbs[ $this->getModelDescriber($model) ] = [ $editRoute, $model ];
     }
 
@@ -278,13 +278,13 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return array
      */
-    protected function addModelToRoute($model, $relationship, $indexRoute)
+    protected function addModelToRoute( $model, $relationship, $indexRoute )
     {
-        if($relationship && $model->exists)
+        if ( $relationship && $model->exists )
         {
             $parent = $model->$relationship;
         }
-        elseif($model && sizeof(Input::all()) > 0)
+        elseif ( $model && sizeof(Input::all()) > 0 )
         {
             $parent = $this->establishParentFromInput($this->getPossibleInputValuesAsParents($model));
         }
@@ -304,13 +304,13 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return array
      */
-    protected function getPossibleInputValuesAsParents($model)
+    protected function getPossibleInputValuesAsParents( $model )
     {
-        return array_filter(Input::all(), function ($value, $key) use ($model)
+        return array_filter(Input::all(), function ( $value, $key ) use ( $model )
         {
             $foreignKeys = $this->filterPotentialForeignKeys($model);
 
-            array_walk($foreignKeys, function (&$value)
+            array_walk($foreignKeys, function ( &$value )
             {
                 $value = str_replace('_id', '', $value);
             });
@@ -325,9 +325,9 @@ class BreadcrumbViewComposer extends ViewComposer
      *
      * @return mixed
      */
-    protected function establishParentFromInput($possibleInputParents)
+    protected function establishParentFromInput( $possibleInputParents )
     {
-        if(sizeof($possibleInputParents) == 1)
+        if ( sizeof($possibleInputParents) == 1 )
         {
             $key = str_singular(head(array_keys($possibleInputParents)));
 
