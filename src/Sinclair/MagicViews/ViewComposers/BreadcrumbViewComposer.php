@@ -19,7 +19,8 @@ class BreadcrumbViewComposer extends ViewComposer
 
         $route = explode('.', Route::currentRouteName());
 
-        $breadcrumbs[ trans('magic-views::magic-views.' . last($route)) ] = last($route);
+        if ( Route::currentRouteName() != 'home' )
+            $breadcrumbs[ trans('magic-views::magic-views.' . last($route)) ] = last($route);
 
         $view->with('breadcrumbs', $breadcrumbs);
     }
@@ -37,7 +38,7 @@ class BreadcrumbViewComposer extends ViewComposer
         if ( $view->offsetExists('rows') )
             return $view->offsetGet('rows')
                         ->first();
-        
+
         return false;
     }
 
