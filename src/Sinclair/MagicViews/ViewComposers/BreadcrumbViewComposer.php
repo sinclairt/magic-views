@@ -268,7 +268,8 @@ class BreadcrumbViewComposer extends ViewComposer
         $editRoute = $this->getDefaultEditRoute($snake_case_model, $model);
 
         // if the route is the models index we don't want to offer the edit route we will need a descriptive breadcrumbs such as all.
-        if ( !in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute) )
+        // Also if the model doesn't exist we wont be able to get the id for the route anyway
+        if ( !in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute) && $model->exists )
             $breadcrumbs[ $this->getModelDescriber($model) ] = [ $editRoute, $model ];
     }
 
