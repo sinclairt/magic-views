@@ -48,24 +48,29 @@ class BreadcrumbViewComposer extends ViewComposer
      */
     protected function addBreadcrumbs( $model, &$breadcrumbs = [ ] )
     {
-        // if the parent has a parent we need to go up the chain or we can try and guess the parent
-        // but only if there is one foreign key in the fillable array otherwise its too much guessing
-        $this->handleParent($model, $breadcrumbs);
-
-        // if we have a specified method to add the objects breadcrumbs perfect we'll use that!
-        if ( method_exists($model, 'addBreadcrumbs') )
-            $breadcrumbs = array_merge($breadcrumbs, $model->addBreadcrumbs());
-        else
+        // because the method id recursive we need a way of escaping failed guesses rather than throwing an exception -
+        // if its not enough, then user will have to implement the methods to be sure
+        if ( !is_null($model) )
         {
-            // else we will try and guess them
-            // first we will need to snake case the model base name as that's the naming convention we're assuming
-            $snake_case_model = $this->snakeCaseModel($model);
+            // if the parent has a parent we need to go up the chain or we can try and guess the parent
+            // but only if there is one foreign key in the fillable array otherwise its too much guessing
+            $this->handleParent($model, $breadcrumbs);
 
-            // next we need to set the index route
-            $indexRoute = $this->setIndexRoute($model, $breadcrumbs, $snake_case_model);
+            // if we have a specified method to add the objects breadcrumbs perfect we'll use that!
+            if ( method_exists($model, 'addBreadcrumbs') )
+                $breadcrumbs = array_merge($breadcrumbs, $model->addBreadcrumbs());
+            else
+            {
+                // else we will try and guess them
+                // first we will need to snake case the model base name as that's the naming convention we're assuming
+                $snake_case_model = $this->snakeCaseModel($model);
 
-            // and then the edit route
-            $this->setEditRoute($model, $breadcrumbs, $snake_case_model, $indexRoute);
+                // next we need to set the index route
+                $indexRoute = $this->setIndexRoute($model, $breadcrumbs, $snake_case_model);
+
+                // and then the edit route
+                $this->setEditRoute($model, $breadcrumbs, $snake_case_model, $indexRoute);
+            }
         }
     }
 
@@ -87,7 +92,7 @@ class BreadcrumbViewComposer extends ViewComposer
     protected function getModelDescriber( $model )
     {
         if ( property_exists($model, 'describer') )
-            return $model->describer;
+            return $this->properCase($model->{$model->describer});
 
         if ( $model->name != null || $model->name != '' )
             return $model->name;
@@ -95,7 +100,7 @@ class BreadcrumbViewComposer extends ViewComposer
         if ( $model->text != null || $model->text != '' )
             return $model->text;
 
-        return $this->properCase($this->snakeCaseModel($model));
+        return $this->properCase(snake_case($model->{array_first($model->getFillable())}));
     }
 
     /**
@@ -189,19 +194,19 @@ class BreadcrumbViewComposer extends ViewComposer
     protected function handleParent( $model, &$breadcrumbs )
     {
         // if the model doesn't exist the parent may have been passed through as a query string
-        if ( !$model->exists )
+        if ( is_null($model) )
         {
-            // to be sure lets see if any of the input array matched the foreign keys
-            $possibleInputParents = $this->getPossibleInputValuesAsParents($model);
-
-            if ( sizeof($possibleInputParents) == 1 )
-                $this->addBreadcrumbs($this->establishParentFromInput($possibleInputParents), $breadcrumbs);
+            // do nothing
+        }
+        elseif ( !$model->exists )
+        {
+            $this->handleParentWithoutModel($model, $breadcrumbs);
         }
         elseif ( method_exists($model, 'parentRelationship') )
         {
             $this->addBreadcrumbs($model->parentRelationship(), $breadcrumbs);
         }
-        elseif ( $relationship = $this->guessParentRelationship($model, $breadcrumbs) )
+        elseif ( $relationship = $this->guessParentRelationship($model) )
         {
             $this->addBreadcrumbs($model->$relationship, $breadcrumbs);
         }
@@ -270,7 +275,7 @@ class BreadcrumbViewComposer extends ViewComposer
         // if the route is the models index we don't want to offer the edit route we will need a descriptive breadcrumbs such as all.
         // Also if the model doesn't exist we wont be able to get the id for the route anyway
         if ( !in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute) && $model->exists )
-            $breadcrumbs[ str_plural($this->getModelDescriber($model)) ] = [ $editRoute, $model ];
+            $breadcrumbs[ $this->getModelDescriber($model) ] = [ $editRoute, $model ];
     }
 
     /**
@@ -337,5 +342,21 @@ class BreadcrumbViewComposer extends ViewComposer
         }
 
         return null;
+    }
+
+    /**
+     * @param $model
+     *
+     * @param $breadcrumbs
+     *
+     * @return mixed
+     */
+    protected function handleParentWithoutModel( $model, &$breadcrumbs )
+    {
+        // to be sure lets see if any of the input array matched the foreign keys
+        $possibleInputParents = $this->getPossibleInputValuesAsParents($model);
+
+        if ( sizeof($possibleInputParents) == 1 )
+            $this->addBreadcrumbs($this->establishParentFromInput($possibleInputParents), $breadcrumbs);
     }
 }
