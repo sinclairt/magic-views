@@ -16,7 +16,7 @@ class LayoutViewComposer extends ViewComposer
 
         $buttons = $this->getOffset($view, 'buttons', [ 'all' ]);
 
-        $pageTitle = $this->getOffset($view, 'pageTitle', ucwords(trans('magic-views::magic-views.' . $modelName)));
+        $pageTitle = $this->getOffset($view, 'pageTitle', str_plural(ucwords(trans('magic-views::magic-views.' . $modelName))));
 
         $pageSubTitle = $this->getOffset($view, 'pageSubTitle', ucwords(trans('magic-views::magic-views.' . last(explode('.', $blade)))));
 

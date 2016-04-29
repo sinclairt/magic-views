@@ -248,7 +248,7 @@ class BreadcrumbViewComposer extends ViewComposer
         // if the guessed route exists we need to add it the breadcrumbs.
         // We'll try and add the parent model for good measure just in case it needs it, it won't hurt if not.
         if ( Route::has($indexRoute) )
-            $breadcrumbs[ $this->properCase($snake_case_model) ] = $this->addModelToRoute($model, $relationship, $indexRoute);
+            $breadcrumbs[ str_plural($this->properCase($snake_case_model)) ] = $this->addModelToRoute($model, $relationship, $indexRoute);
 
         // We'll need to return the route for the edit comparisons later
         return $indexRoute;
@@ -270,7 +270,7 @@ class BreadcrumbViewComposer extends ViewComposer
         // if the route is the models index we don't want to offer the edit route we will need a descriptive breadcrumbs such as all.
         // Also if the model doesn't exist we wont be able to get the id for the route anyway
         if ( !in_array(Route::currentRouteName(), $this->getDefaultRestRoutes($snake_case_model, $indexRoute, $editRoute)) && Route::has($editRoute) && $model->exists )
-            $breadcrumbs[ $this->getModelDescriber($model) ] = [ $editRoute, $model ];
+            $breadcrumbs[ str_plural($this->getModelDescriber($model)) ] = [ $editRoute, $model ];
     }
 
     /**
