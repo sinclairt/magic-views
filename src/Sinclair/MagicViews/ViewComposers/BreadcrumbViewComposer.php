@@ -253,7 +253,7 @@ class BreadcrumbViewComposer extends ViewComposer
         // if the guessed route exists we need to add it the breadcrumbs.
         // We'll try and add the parent model for good measure just in case it needs it, it won't hurt if not.
         if ( Route::has($indexRoute) )
-            $breadcrumbs[ str_plural($this->properCase($snake_case_model)) ] = $this->addModelToRoute($model, $relationship, $indexRoute);
+            $breadcrumbs[ str_plural(get_trans('magic-views::magic-views.' . $snake_case_model)) ] = $this->addModelToRoute($model, $relationship, $indexRoute);
 
         // We'll need to return the route for the edit comparisons later
         return $indexRoute;
