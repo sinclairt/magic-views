@@ -10,8 +10,8 @@ class BreadcrumbViewComposer extends ViewComposer
 {
     public function compose( View $view )
     {
-        // set default home route if it exists
-        $breadcrumbs = Route::has('home') ? [ 'home' => 'home' ] : [ ];
+        // pull in user defined prefix
+        $breadcrumbs = is_array($breadcrumbs = config('magic-views.breadcrumb-prefix')) ? $breadcrumbs : [ ];
 
         // first we need to set the model, we may need to get the first row
         if ( $model = $this->getModelFromView($view) )
