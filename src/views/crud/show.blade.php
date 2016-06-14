@@ -8,16 +8,20 @@
         </div>
 
         <div class="panel-body">
-            <table class="table table-striped table-condensed">
-                <tbody>
-                @foreach($columns as $column)
-                    <tr>
-                        <td><strong>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong></td>
-                        <td>@include('magic-views::partials.presentValue', ['row' => $model])</td>
-                    </tr>
-                @endforeach
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed">
+                    <tbody>
+                    @foreach($columns as $column)
+                        <tr>
+                            <td>
+                                <strong>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</strong>
+                            </td>
+                            <td>@include('magic-views::partials.presentValue', ['row' => $model])</td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>

@@ -2,7 +2,7 @@
     <div class="col-sm-offset-3 col-sm-6">
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="{{ $field }}" value="{{ old($field, isset($model) ? $model->$field : null) }}"> {{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}
+                <input type="checkbox" name="{{ $field }}" value="1" @if( old($field, isset($model) ? $model->$field : null) == 1) checked @endif>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $field) }}
             </label>
         </div>
     </div>

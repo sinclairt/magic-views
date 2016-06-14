@@ -7,39 +7,41 @@
         </div>
         <div class="panel-body">
             @if(sizeof($rows) > 0)
-                <table class="table table-striped table-condensed">
-                    <thead>
-                    <tr>
-                        @foreach($columns as $column)
-                            <th>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
-                        @endforeach
-                        @if(isset($customOptions) || $buttons != [])
-                            <th>{{ get_trans('magic-views::magic-views.options') }}</th>
-                        @endif
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($rows as $row)
+                <div class="table-responsive">
+                    <table class="table table-striped table-condensed">
+                        <thead>
                         <tr>
                             @foreach($columns as $column)
-                                <td>
-                                    @include('magic-views::partials.presentValue')
-                                    @include('magic-views::partials.deleted_badge')
-                                </td>
+                                <th>{{ get_trans('magic-views::magic-views.fields.' . $modelName . '.' . $column) }}</th>
                             @endforeach
                             @if(isset($customOptions) || $buttons != [])
-                                <td>
-                                    @if(isset($customOptions))
-                                        @include($customOptions)
-                                    @else
-                                        @include('magic-views::partials.table.options')
-                                    @endif
-                                </td>
+                                <th>{{ get_trans('magic-views::magic-views.options') }}</th>
                             @endif
                         </tr>
-                    @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                        @foreach($rows as $row)
+                            <tr>
+                                @foreach($columns as $column)
+                                    <td>
+                                        @include('magic-views::partials.presentValue')
+                                        @include('magic-views::partials.deleted_badge')
+                                    </td>
+                                @endforeach
+                                @if(isset($customOptions) || $buttons != [])
+                                    <td>
+                                        @if(isset($customOptions))
+                                            @include($customOptions)
+                                        @else
+                                            @include('magic-views::partials.table.options')
+                                        @endif
+                                    </td>
+                                @endif
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
             @else
                 <p class="alert alert-info">There are no {{ str_plural(get_trans('magic-views::magic-views.' . $modelName)) }}.</p>
             @endif
