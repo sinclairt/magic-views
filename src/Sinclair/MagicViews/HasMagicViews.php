@@ -26,17 +26,17 @@ trait HasMagicViews
 
     private function view($blade, $model, $arguments)
     {
+        $class = get_class();
+
+        $modelName = snake_case($this->getBaseClass());
+
         if (sizeof($arguments) > 0)
             if (is_array($arguments[ 0 ]))
                 extract($arguments[ 0 ]);
             elseif (is_object($arguments[ 0 ]))
                 $model = $arguments[ 0 ];
 
-        $class = get_class();
-
-        $modelName = snake_case($this->getBaseClass());
-
-        $data = array_merge(get_defined_vars(), func_get_args());
+        $data = array_replace(get_defined_vars(), func_get_args());
 
         $data[ 'blade' ] = str_replace('magic-views::crud.', '', $blade);
 
