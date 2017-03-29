@@ -1,6 +1,6 @@
 {
-  "name": "sinclair/magic-views",
-  "description": "Magic CRUD views that takes the hassle out of repetitive blades.",
+  "name": "sinclairt/magic-views",
+  "description": "Magic CRUD views that takes the hassle out of repetitive blades. Useful for RAD",
   "type": "library",
   "require": {
     "illuminate/view": "^5.1",
